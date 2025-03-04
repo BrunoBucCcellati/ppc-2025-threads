@@ -60,7 +60,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_random_array) {
   task_data_omp->outputs_count.emplace_back(output_array.size());
 
   // Create Task
-  deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP hoare_sort_task_sequential(task_data_omp);
+  deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP hoare_sort_task_openmp(task_data_omp);
   ASSERT_EQ(hoare_sort_task_openmp.Validation(), true);
   hoare_sort_task_openmp.PreProcessing();
   hoare_sort_task_openmp.Run();
