@@ -36,7 +36,7 @@ void deryabin_m_hoare_sort_simple_merge_omp::HoaraSort(std::vector<double>& a, s
 }
 
 void deryabin_m_hoare_sort_simple_merge_omp::MergeTwoParts(std::vector<double>& a, size_t left, size_t right,
-                                                                 size_t dimension) {
+                                                           size_t dimension) {
   size_t middle = left + ((right - left) / 2);
   size_t l_cur = left;
   size_t r_cur = middle + 1;
