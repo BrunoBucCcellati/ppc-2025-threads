@@ -35,7 +35,8 @@ void deryabin_m_hoare_sort_simple_merge_omp::HoaraSort(std::vector<double>& a, s
   }
 }
 
-void deryabin_m_hoare_sort_simple_merge_omp::MergeTwoParts(std::vector<double>& a, size_t left, size_t right, size_t dimension) const {
+void deryabin_m_hoare_sort_simple_merge_omp::MergeTwoParts(std::vector<double>& a, size_t left, size_t right,
+                                                                 size_t dimension) {
   size_t middle = left + ((right - left) / 2);
   size_t l_cur = left;
   size_t r_cur = middle + 1;
@@ -85,7 +86,8 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskSequential::RunImpl() 
   }
   for (size_t i = 0; i < (size_t)(log((double)chunk_count_) / std::numbers::ln2); i++) {
     for (size_t j = 0; j < chunk_count; j++) {
-      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1, dimension_);
+      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1,
+                    dimension_);
       chunk_count--;
     }
   }
@@ -122,7 +124,8 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP::RunImpl() {
   for (size_t i = 0; i < (size_t)(log((double)chunk_count_) / std::numbers::ln2); i++) {
 #pragma omp for
     for (size_t j = 0; j < chunk_count; j++) {
-      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1, dimension_);
+      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1,
+                    dimension_);
       chunk_count--;
     }
   }
