@@ -41,7 +41,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_pipeline_run_Omp) {
   task_data_seq->inputs_count.emplace_back(chunk_count);
   task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t*>(true_sol.data()));
   task_data_seq->outputs_count.emplace_back(true_solution.size());
-  deryabin_m_hoare_sort_simple_merge_seq::HoareSortTaskSequential hoare_sort_task_sequential(task_data_seq);
+  deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskSequential hoare_sort_task_sequential(task_data_seq);
   ASSERT_EQ(hoare_sort_task_sequential.Validation(), true);
   hoare_sort_task_sequential.PreProcessing();
   hoare_sort_task_sequential.Run();
@@ -95,7 +95,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_task_run_Omp) {
   task_data_seq->inputs_count.emplace_back(chunk_count);
   task_data_seq->outputs.emplace_back(reinterpret_cast<uint8_t*>(true_sol.data()));
   task_data_seq->outputs_count.emplace_back(true_solution.size());
-  deryabin_m_hoare_sort_simple_merge_seq::HoareSortTaskSequential hoare_sort_task_sequential(task_data_seq);
+  deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskSequential hoare_sort_task_sequential(task_data_seq);
   ASSERT_EQ(hoare_sort_task_sequential.Validation(), true);
   hoare_sort_task_sequential.PreProcessing();
   hoare_sort_task_sequential.Run();
