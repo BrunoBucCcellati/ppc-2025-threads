@@ -114,7 +114,7 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP::ValidationImpl
 }
 
 bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP::RunImpl() {
-  short chunk_count = (short)chunk_count_;
+  auto chunk_count = (short)chunk_count_;
 #pragma omp parallel
 #pragma omp for
   for (short count = 0; count < chunk_count; count++) {
