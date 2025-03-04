@@ -35,12 +35,12 @@ void deryabin_m_hoare_sort_simple_merge_omp::HoaraSort(std::vector<double>& a, s
   }
 }
 
-void deryabin_m_hoare_sort_simple_merge_omp::MergeTwoParts(std::vector<double>& a, size_t left, size_t right) const {
+void deryabin_m_hoare_sort_simple_merge_omp::MergeTwoParts(std::vector<double>& a, size_t left, size_t right, size_t dimension) const {
   size_t middle = left + ((right - left) / 2);
   size_t l_cur = left;
   size_t r_cur = middle + 1;
-  std::vector<double> l_buff(dimension_);
-  std::vector<double> r_buff(dimension_);
+  std::vector<double> l_buff(dimension);
+  std::vector<double> r_buff(dimension);
   std::copy(a.begin() + (long)l_cur, a.begin() + (long)r_cur, l_buff.begin() + (long)l_cur);
   std::copy(a.begin() + (long)r_cur, a.begin() + (long)right + 1, r_buff.begin() + (long)r_cur);
   for (size_t i = left; i <= right; i++) {
@@ -85,7 +85,7 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskSequential::RunImpl() 
   }
   for (size_t i = 0; i < (size_t)(log((double)chunk_count_) / std::numbers::ln2); i++) {
     for (size_t j = 0; j < chunk_count; j++) {
-      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1);
+      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1, dimension_);
       chunk_count--;
     }
   }
@@ -119,11 +119,10 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP::RunImpl() {
     HoaraSort(input_array_A_, count * min_chunk_size_, ((count + 1) * min_chunk_size_) - 1);
   }
 #pragma omp barrier
-#pragma omp critical
   for (size_t i = 0; i < (size_t)(log((double)chunk_count_) / std::numbers::ln2); i++) {
 #pragma omp for
     for (size_t j = 0; j < chunk_count; j++) {
-      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1);
+      MergeTwoParts(input_array_A_, j * min_chunk_size_ << (i + 1), ((j + 1) * min_chunk_size_ << (i + 1)) - 1, dimension_);
       chunk_count--;
     }
   }
