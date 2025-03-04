@@ -8,10 +8,10 @@
 
 namespace deryabin_m_hoare_sort_simple_merge_omp {
 
- // сортировка Хоара
- void HoaraSort(std::vector<double>& a, size_t first, size_t last);
- // слияние двух отсортированных частей
- void MergeTwoParts(std::vector<double>& a, size_t left, size_t right) const;
+// сортировка Хоара
+void HoaraSort(std::vector<double>& a, size_t first, size_t last);
+// слияние двух отсортированных частей
+void MergeTwoParts(std::vector<double>& a, size_t left, size_t right) const;
 
 class HoareSortTaskSequential : public ppc::core::Task {
  public:
