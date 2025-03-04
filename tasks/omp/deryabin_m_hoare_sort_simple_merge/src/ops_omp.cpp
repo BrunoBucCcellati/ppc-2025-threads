@@ -123,8 +123,8 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP::RunImpl() {
 #pragma omp parallel for
   for (short i = 0; i < (short)(log((double)chunk_count_) / std::numbers::ln2); i++) {
     for (short j = 0; j < chunk_count; j++) {
-      MergeTwoParts(input_array_A_, j * (short)min_chunk_size_ << ((short)i + 1),
-                    ((j + 1) * (short)min_chunk_size_ << ((short)i + 1)) - 1, dimension_);
+      MergeTwoParts(input_array_A_, j * (short)min_chunk_size_ << (i + 1),
+                    ((j + 1) * (short)min_chunk_size_ << (i + 1)) - 1, dimension_);
       chunk_count--;
     }
   }
