@@ -130,8 +130,8 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP::RunImpl() {
         chunk_count--;
       }
     }
-  }
 #pragma omp barrier
+  }
   return true;
 }
 
