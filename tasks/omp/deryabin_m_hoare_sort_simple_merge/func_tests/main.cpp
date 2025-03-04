@@ -21,7 +21,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_short_array) {
   std::vector<double> true_solution{-33, -22, -11, -3, -2, -1};
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
@@ -52,7 +52,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_random_array) {
   std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
@@ -83,7 +83,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_negative_elements_array) {
   std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
@@ -114,7 +114,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_shuffle_array) {
   std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
@@ -145,7 +145,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_random_array_small_pieces) {
   std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
@@ -176,7 +176,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_random_array_large_pieces) {
   std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
@@ -208,7 +208,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_partially_sorted_array) {
   std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
@@ -238,7 +238,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_backward_sorted_array) {
   std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
-  auto task_data_seq = std::make_shared<ppc::core::TaskData>();
+  auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
   task_data_omp->inputs_count.emplace_back(input_array.size());
   task_data_omp->inputs_count.emplace_back(chunk_count);
