@@ -121,10 +121,10 @@ bool deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP::RunImpl() {
   }
 #pragma omp barrier
   for (size_t i = 0; i < (size_t)(log((double)chunk_count_) / std::numbers::ln2); i++) {
-#pragma omp parallel for 
-    for (short j = 0; j < chunk_count; j++) {
-      MergeTwoParts(input_array_A_, j * (short)min_chunk_size_ << ((short)i + 1),
-                    ((j + 1) * (short)min_chunk_size_ << ((short)i + 1)) - 1, dimension_);
+#pragma omp parallel for
+     for (short j = 0; j < chunk_count; j++) {
+       MergeTwoParts(input_array_A_, j * (short)min_chunk_size_ << ((short)i + 1),
+                     ((j + 1) * (short)min_chunk_size_ << ((short)i + 1)) - 1, dimension_);
 #pragma omp critical 
       { chunk_count--; }
     }
