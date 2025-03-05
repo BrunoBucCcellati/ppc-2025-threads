@@ -37,15 +37,15 @@ void deryabin_m_hoare_sort_simple_merge_omp::HoaraSort(std::vector<double>& a, s
 
 void deryabin_m_hoare_sort_simple_merge_omp::MergeTwoParts(std::vector<double>& a, size_t left, size_t right,
                                                            size_t dimension) {
-  size_t middle = left + ((right - left) / 2);
-  size_t l_cur = left;
-  size_t r_cur = middle + 1;
-  std::vector<double> l_buff(dimension);
-  std::vector<double> r_buff(dimension);
-  std::copy(a.begin() + (long)l_cur, a.begin() + (long)r_cur, l_buff.begin() + (long)l_cur);
-  std::copy(a.begin() + (long)r_cur, a.begin() + (long)right + 1, r_buff.begin() + (long)r_cur);
+  size_t middle = (right - left) / 2;
+  size_t l_cur = 0;
+  size_t r_cur = 0;
+  std::vector<double> l_buff(middle + 1);
+  std::vector<double> r_buff(middle + 1);
+  std::copy(a.begin() + (long)left, a.begin() + (long)left + (long)middle + 1, l_buff.begin());
+  std::copy(a.begin() + (long)left + (long)middle + 1, a.begin() + (long)right + 1, r_buff.begin());
   for (size_t i = left; i <= right; i++) {
-    if (l_cur <= middle && r_cur <= right) {
+    if (l_cur <= middle && r_cur <= middle) {
       if (l_buff[l_cur] < r_buff[r_cur]) {
         a[i] = l_buff[l_cur];
         l_cur++;
