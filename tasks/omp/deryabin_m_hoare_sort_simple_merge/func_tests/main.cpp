@@ -11,14 +11,19 @@
 #include "core/task/include/task.hpp"
 #include "omp/deryabin_m_hoare_sort_simple_merge/include/ops_omp.hpp"
 
-TEST(deryabin_m_hoare_sort_simple_merge_omp, test_short_array) {
+TEST(deryabin_m_hoare_sort_simple_merge_omp, test_random_array) {
   // Create data
-  std::vector<double> input_array{-1, -2, -3, -11, -22, -33};
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_real_distribution<> distribution(-100, 100);
+  std::vector<double> input_array(800);
+  std::ranges::generate(input_array.begin(), input_array.end(), [&] { return distribution(gen); });
   std::vector<std::vector<double>> in_array(1, input_array);
-  size_t chunk_count = 2;
-  std::vector<double> output_array(6);
+  size_t chunk_count = 8;
+  std::vector<double> output_array(800);
   std::vector<std::vector<double>> out_array(1, output_array);
-  std::vector<double> true_solution{-33, -22, -11, -3, -2, -1};
+  std::vector<double> true_solution(input_array);
+  std::ranges::sort(true_solution.begin(), true_solution.end());
 
   // Create TaskData
   auto task_data_omp = std::make_shared<ppc::core::TaskData>();
@@ -37,16 +42,16 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_short_array) {
   ASSERT_EQ(true_solution, out_array[0]);
 }
 
-TEST(deryabin_m_hoare_sort_simple_merge_omp, test_random_array) {
+TEST(deryabin_m_hoare_sort_simple_merge_omp, test_large_array) {
   // Create data
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_real_distribution<> distribution(-100, 100);
-  std::vector<double> input_array(800);
+  std::vector<double> input_array(512000);
   std::ranges::generate(input_array.begin(), input_array.end(), [&] { return distribution(gen); });
   std::vector<std::vector<double>> in_array(1, input_array);
-  size_t chunk_count = 8;
-  std::vector<double> output_array(800);
+  size_t chunk_count = 512;
+  std::vector<double> output_array(512000);
   std::vector<std::vector<double>> out_array(1, output_array);
   std::vector<double> true_solution(input_array);
   std::ranges::sort(true_solution.begin(), true_solution.end());
