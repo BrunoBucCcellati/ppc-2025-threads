@@ -78,7 +78,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_pipeline_run_Seq) {
   task_data_seq->outputs_count.emplace_back(output_array.size());
 
   auto hoare_sort_simple_merge_task_seq =
-      std::make_shared<deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP>(task_data_seq);
+      std::make_shared<deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskSequential>(task_data_seq);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
   perf_attr->num_running = 10;
@@ -161,7 +161,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_task_run_Seq) {
   task_data_seq->outputs_count.emplace_back(output_array.size());
 
   auto hoare_sort_simple_merge_task_seq =
-      std::make_shared<deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskOpenMP>(task_data_seq);
+      std::make_shared<deryabin_m_hoare_sort_simple_merge_omp::HoareSortTaskSequential>(task_data_seq);
 
   auto perf_attr = std::make_shared<ppc::core::PerfAttr>();
   perf_attr->num_running = 10;
