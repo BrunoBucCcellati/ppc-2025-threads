@@ -26,7 +26,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_pipeline_run_Omp) {
   std::vector<double> output_array(512000);
   std::vector<std::vector<double>> out_array(1, output_array);
   std::vector<double> true_solution(input_array);
-  std::vector<std::vector<double>> true_sol(1, true_solution);
+  std::ranges::sort(true_solution.begin(), true_solution.end());
 
   auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
@@ -64,7 +64,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_pipeline_run_Omp) {
   perf_analyzer_omp->PipelineRun(perf_attr, perf_results);
   perf_analyzer_seq->PipelineRun(perf_attr, perf_results);
   ppc::core::Perf::PrintPerfStatistic(perf_results);
-  ASSERT_EQ(true_sol[0], out_array[0]);
+  ASSERT_EQ(true_solution, out_array[0]);
 }
 
 TEST(deryabin_m_hoare_sort_simple_merge_omp, test_task_run_Omp) {
@@ -80,7 +80,7 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_task_run_Omp) {
   std::vector<double> output_array(512000);
   std::vector<std::vector<double>> out_array(1, output_array);
   std::vector<double> true_solution(input_array);
-  std::vector<std::vector<double>> true_sol(1, true_solution);
+  std::ranges::sort(true_solution.begin(), true_solution.end());
 
   auto task_data_omp = std::make_shared<ppc::core::TaskData>();
   task_data_omp->inputs.emplace_back(reinterpret_cast<uint8_t*>(in_array.data()));
@@ -117,5 +117,5 @@ TEST(deryabin_m_hoare_sort_simple_merge_omp, test_task_run_Omp) {
   perf_analyzer_omp->TaskRun(perf_attr, perf_results);
   perf_analyzer_seq->TaskRun(perf_attr, perf_results);
   ppc::core::Perf::PrintPerfStatistic(perf_results);
-  ASSERT_EQ(true_sol[0], out_array[0]);
+  ASSERT_EQ(true_solution, out_array[0]);
 }
